@@ -1,0 +1,392 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Picross</title>
+  <script type='text/javascript' src="http://epilog.stanford.edu/javascript/epilog.js"></script>
+  <script type='text/javascript' src="http://worksheets.stanford.edu/javascript/worksheets.js"></script>
+  </head>
+
+<!--=======================================================================-->
+
+<body leftmargin='0' topmargin='0' marginwidth='0' marginheight='0' bgcolor='#f4f6f8'
+      onload='initialize()'>
+  <center>
+    <table width='640' cellpadding='0' cellspacing='0' border='0'>
+      <tr>
+        <td width='640' height='90' align='center'>
+          <span style='font-size:48px;color:#000088;cursor:pointer;width:100%'>Picross</span>
+        </td>
+      </tr>
+    </table>
+  </center>
+
+<!--=======================================================================-->
+
+<center>
+  <span id="message3"></span>
+  <br/>
+    <span id='level' style='font-size:18px;color:#666666'>
+        <span id="message2" style='font-size:18px;color:#666666'>PICK A LEVEL TO START!</span>
+        <br/>
+        <button id='easy' style='font-size:18px;color:rgb(104, 224, 104);width:70;font-family:garamond' onclick='handle(this);'>Easy</button>
+        <button id='medium' style='color:rgb(236, 194, 117);font-size:18px;font-family:garamond' onclick='handle(this);'>Medium</button>
+        <button id='hard' style='font-size:18px;color:rgb(235, 72, 72);width:70;font-family:garamond' onclick='handle(this);'>Hard</button>
+      </span>
+  </span>
+  
+  <br/>
+<span id='message' style='font-size:18px;color:#666666'>Click squares to play!
+  <span style='font-size:18px;color:#666666'>Number of mistakes made: <input type="button" id="mistakes" ></input></span>
+</span>
+  <table cellspacing='0' border='10' bgcolor='#ffffff' style='cursor:pointer'>
+    <tr>
+      <td id='blank(1,4)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(2,4)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(3,4)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(4,4)' style='background-color:white; border-left-style: hidden; border-right-width: 5px; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(1,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(3,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(4,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(5,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(6,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(7,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(8,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(9,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(10,10)' style='background-color:white; border-bottom-style: hidden; border-left-style: hidden; border-right-style:hidden; border-top-style: hidden;' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id='blank(1,3)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(2,3)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(3,3)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(4,3)' style='background-color:white; border-left-style: hidden; border-right-width: 5px; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(1,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(2,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(3,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(4,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(5,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(6,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(7,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(8,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">0</td>
+      <td id='hint(9,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(10,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">0</td>
+    </tr>
+    <tr>
+      <td id='blank(1,2)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(2,2)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(3,2)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(4,2)' style='background-color:white; border-left-style: hidden; border-right-width: 5px; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(1,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(2,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(3,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(4,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(5,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(6,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">5</td>
+      <td id='hint(7,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(8,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(9,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(10,10)' style='background-color:white; border-bottom-style: hidden; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+    </tr>
+    <tr>
+      <td id='blank(1,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(2,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(3,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='blank(4,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-width: 5px' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(1,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(2,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(3,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(4,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(5,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(6,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(7,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(8,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">5</td>
+      <td id='hint(9,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(10,1)' style='background-color:white; border-bottom-width: 5px; border-top-style: hidden; border-left-style: hidden; border-right-style:hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+    </tr>
+    <tr>
+      <td id='hint(1,10)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,10)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(3,10)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(4,10)' style='background-color:white; border-left-style: hidden; border-right-width: 5px; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+        <td id='mark(1,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(2,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(3,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(4,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(5,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(6,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(7,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(8,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(9,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(10,10)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      </tr>
+    <tr>
+      <td id='hint(1,9)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,9)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(3,9)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">4</td>
+      <td id='hint(4,9)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+        <td id='mark(1,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(2,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(3,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(4,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(5,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(6,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(7,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(8,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(9,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(10,9)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      </tr>
+    <tr>
+      <td id='hint(1,8)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(2,8)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(3,8)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='hint(4,8)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)" >1</td>
+        <td id='mark(1,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(2,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(3,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(4,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(5,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(6,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(7,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(8,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(9,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(10,8)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      </tr>
+    <tr>
+      <td id='hint(1,7)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,7)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(3,7)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(4,7)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+        <td id='mark(1,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(2,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(3,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(4,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(5,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(6,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(7,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(8,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(9,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+        <td id='mark(10,7)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      </tr>
+    <tr>
+      <td id='hint(1,6)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(2,6)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(3,6)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(4,6)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='mark(1,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(2,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(3,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(4,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(5,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(6,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(7,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(8,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(9,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(10,6)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id='hint(1,5)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,5)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(3,5)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(4,5)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">2</td>
+      <td id='mark(1,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(2,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(3,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(4,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(5,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(6,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(7,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(8,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(9,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(10,5)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id='hint(1,4)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,4)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(3,4)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">5</td>
+      <td id='hint(4,4)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='mark(1,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(2,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(3,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(4,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(5,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(6,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(7,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(8,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(9,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(10,4)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id='hint(1,3)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,3)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(3,3)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(4,3)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">4</td>
+      <td id='mark(1,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(2,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(3,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(4,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(5,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(6,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(7,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(8,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(9,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(10,3)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id='hint(1,2)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,2)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(3,2)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">4</td>
+      <td id='hint(4,2)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">5</td>
+      <td id='mark(1,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(2,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(3,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(4,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(5,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(6,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(7,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(8,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(9,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(10,2)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+    <tr>
+      <td id='hint(1,1)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='hint(2,1)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">1</td>
+      <td id='hint(3,1)' style='background-color:white; border-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='hint(4,1)' style='background-color:white; border-right-width: 5px; border-left-style: hidden; border-top-style:hidden; border-bottom-style: hidden' width='30' height='30' align='center' valign='center' onclick="handle(this)">3</td>
+      <td id='mark(1,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(2,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(3,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(4,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(5,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(6,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(7,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(8,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(9,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+      <td id='mark(10,1)' style='background-color:white' width='30' height='30' align='center' valign='center' onclick="handle(this)">&nbsp;</td>
+    </tr>
+  </table>
+  <br/>
+  <input type="checkbox" id="assisted" onclick="modcheck(this)">Assisted</input>
+  <input type="checkbox" id="hint" onclick="modcheck(this)">Hint</input>
+  <input type='button' id='step' value='Step' onclick='handle(this)'/>
+
+  <br/>
+</center>
+
+<br/>
+<br/>
+
+<!--=======================================================================-->
+
+<textarea id='lambda' type='text/hrf' style='display:none'>
+correct_cell(mark(6,10))
+correct_cell(mark(6,8))
+correct_cell(mark(6,7))
+correct_cell(mark(6,6))
+correct_cell(mark(6,5))
+correct_cell(mark(6,4))
+correct_cell(mark(6,2))
+correct_cell(mark(6,1))
+correct_cell(mark(7,9))
+correct_cell(mark(7,8))
+correct_cell(mark(7,6))
+correct_cell(mark(7,3))
+correct_cell(mark(7,2))
+correct_cell(mark(8,10))
+correct_cell(mark(8,9))
+correct_cell(mark(8,5))
+correct_cell(mark(8,4))
+correct_cell(mark(8,3))
+correct_cell(mark(8,2))
+correct_cell(mark(8,1))
+correct_cell(mark(9,10))
+correct_cell(mark(9,9))
+correct_cell(mark(9,5))
+correct_cell(mark(9,3))
+correct_cell(mark(9,2))
+correct_cell(mark(9,1))
+correct_cell(mark(10,8))
+correct_cell(mark(10,7))
+correct_cell(mark(10,6))
+correct_cell(mark(10,3))
+correct_cell(mark(10,2))
+correct_cell(mark(10,1))
+correct_cell(mark(1,10))
+correct_cell(mark(1,7))
+correct_cell(mark(1,6))
+correct_cell(mark(1,2))
+correct_cell(mark(2,1))
+correct_cell(mark(2,2))
+correct_cell(mark(2,4))
+correct_cell(mark(2,8))
+correct_cell(mark(2,9))
+correct_cell(mark(3,9))
+correct_cell(mark(3,6))
+correct_cell(mark(3,4))
+correct_cell(mark(3,2))
+correct_cell(mark(4,1))
+correct_cell(mark(4,2))
+correct_cell(mark(4,4))
+correct_cell(mark(4,5))
+correct_cell(mark(4,8))
+correct_cell(mark(4,9))
+correct_cell(mark(4,10))
+correct_cell(mark(5,1))
+correct_cell(mark(5,4))
+correct_cell(mark(5,5))
+correct_cell(mark(5,6))
+correct_cell(mark(5,9))
+correct_cell(mark(5,10))
+
+num_mistakes(0)
+
+</textarea>
+
+<textarea id='library' type='text/hrf' style='display:none'>
+click(Level) :: member(Level, [easy, medium, hard]) ==> mode(Level)
+click(mark(X,Y)) :: mode(Level) & correct_cell(mark(X,Y)) ==> selected_cell(mark(X,Y)) & ~correct_cell(mark(X,Y))
+click(mark(X,Y)) :: mode(Level) & ~selected_cell(mark(X,Y)) & ~correct_cell(mark(X,Y)) & num_mistakes(Z) & ~incorrect_cell(mark(X,Y)) ==> incorrect_cell(mark(X,Y)) & ~num_mistakes(Z) & ~attribute(mistakes,value,Z) & evaluate(plus(Z, 1), P) & num_mistakes(P)
+    
+    
+style(mark(X,Y),background-color,blue) :- selected_cell(mark(X,Y)) & mode(Level)
+style(mark(X,Y),background-color,red) :- incorrect_cell(mark(X,Y)) & mode(Level)
+
+click(step) :: random_cell(mark(X,Y)) & mode(Level) ==> selected_cell(mark(X,Y)) & ~correct_cell(mark(X,Y)) 
+    
+random_cell(mark(X,Y)) :- evaluate(choose(mark(X,Y), correct_cell(mark(X,Y))), mark(X,Y))
+    
+
+num_mistakes(Z) :- evaluate(countofall(mark(X,Y), incorrect_cell(mark(X,Y))), Z)
+attribute(mistakes,value,X) :- num_mistakes(X)
+
+style(message, display, "block") :- selected_cell(mark(9, 9))
+innerhtml(message, "You Win!") :- win(M) 
+style(mark(X,Y), background-color, white) :- win(M) & incorrect_cell(mark(X,Y))
+win(M) :- evaluate(countofall(mark(X,Y), correct_cell(mark(X,Y))), 0)
+loss(M) :- num_mistakes(X) & ((leq(1, X) & mode(hard))|(leq(5, X) & mode(medium))|(leq(10, X) & mode(easy)))
+innerhtml(message, "You Lose :(") :- loss(M)
+style(mark(X,Y), background-color, black) :- loss(M)
+innerhtml(level, Level) :- mode(Level)
+style(level,font-size, 24px) :- mode(Level)
+style(level,color,turquoise) :- mode(Level)
+style(level, text-transform, uppercase) :- mode(Level)
+innerhtml(message3, "LEVEL:") :- mode(Level)
+
+select(assisted,true) :: ~value(assisted, false) & value(assisted, true) & ~value(hint,true) & value(hint, false)
+select(assisted,false) :: ~value(assisted, true) & value(assisted, false)  
+select(hint,true) :: ~value(hint, false) & value(hint, true) & ~value(assisted,true) & value(assisted, false)
+select(hint,false) :: ~value(hint, true) & value(hint, false)
+select(X, false) :: style(mark(X,Y), cursor, "not-allowed") ==> ~style(mark(X,Y), cursor, "not-allowed")
+
+
+style(mark(X,Y), cursor, "grab") :- ~value(hint, true) & ~value(assisted, true)
+style(mark(X,Y), cursor, "not-allowed") :- value(assisted, true) & ~value(hint, true) & ~correct_cell(mark(X,Y))
+adjacent(mark(X,Y)) :- selected_cell(mark(X,Y+1)) | selected_cell(mark(X,Y-1)) | selected_cell(mark(X-1,Y)) | selected_cell(mark(X+1,Y))  
+style(mark(X,Y), cursor, "not-allowed") :- value(hint, true) & ~value(assisted, true) & ~correct_cell(mark(X,Y)) & adjacent(mark(X,Y))
+</textarea>
+
+<!--=======================================================================-->
+
+</body>
+</html>
